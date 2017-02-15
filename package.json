@@ -1,0 +1,27 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "The classical game of Tic-Tac-Toe written in TypeScript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deep Aggarwal <deep.uiuc@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/deep4788/tictactoe"
+  },
+  "keywords": [
+    "node.js",
+    "typescript",
+    "tictactoe",
+    "grunt"
+  ],
+  "dependencies": {
+    "grunt": "1.0.1",
+    "grunt-cli": "1.2.0",
+    "grunt-ts": "6.0.0-beta.11",
+    "typescript": "2.1.6"
+  }
+}
