@@ -1,7 +1,16 @@
 Tic-Tac-Toe
 ===========
 
-The classical game of Tic-Tac-Toe written in TypeScript.
+The classical game of Tic-Tac-Toe written in **TypeScript**.
+
+Concepts used:
+
+- classes
+- encapsulation
+- static typing
+- modules
+- callbacks
+- importing modules
 
 Description
 -----------
@@ -10,7 +19,7 @@ Installation
 ------------
 TODO
 - Install Node.js and npm
-- Run `npm install -g searchJobs`
+- Run `npm install -g TODO`
 
 Usage
 -----
