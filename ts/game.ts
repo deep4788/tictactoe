@@ -22,12 +22,12 @@ class Game {
     //Ends the game
     private _end(player: number) : void {
         console.log(`Game Over! Player ${player} won the game.`);
+        this._rl.close();
         process.exit();
-        //this._rl.close();
     }
 
     //Checks if the game is over
-    //  FIXME: uses brute force method, can be optimized
+    //  FIXME: uses brute force method; can be optimized
     private _gameover(): ({ over: boolean, player: number }) {
 
         let markAtpos0 = this._board.getMark(0),
@@ -40,18 +40,59 @@ class Game {
             markAtpos7 = this._board.getMark(7),
             markAtpos8 = this._board.getMark(8);
 
+        //Check the rows
         if(markAtpos0 === markAtpos1 &&
            markAtpos0 === markAtpos2 &&
            markAtpos0 !== null &&
            markAtpos0 !== " ") {
             return { over: true, player: this._playersMark.indexOf(markAtpos0) };
         }
+        if(markAtpos3 === markAtpos4 &&
+           markAtpos3 === markAtpos5 &&
+           markAtpos3 !== null &&
+           markAtpos3 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos3) };
+        }
+        if(markAtpos6 === markAtpos7 &&
+           markAtpos6 === markAtpos8 &&
+           markAtpos6 !== null &&
+           markAtpos6 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos6) };
+        }
 
+        //Check the columns
+        if(markAtpos0 === markAtpos3 &&
+           markAtpos0 === markAtpos6 &&
+           markAtpos0 !== null &&
+           markAtpos0 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos0) };
+        }
+        if(markAtpos1 === markAtpos4 &&
+           markAtpos1 === markAtpos7 &&
+           markAtpos1 !== null &&
+           markAtpos1 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos1) };
+        }
+        if(markAtpos2 === markAtpos5 &&
+           markAtpos2 === markAtpos8 &&
+           markAtpos2 !== null &&
+           markAtpos2 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos2) };
+        }
 
-        //if(pos0 === pos1 && pos0 === pos2 && pos0 !== null) {
-
-        //}
-
+        //Check the diagonals
+        if(markAtpos0 === markAtpos4 &&
+           markAtpos0 === markAtpos8 &&
+           markAtpos0 !== null &&
+           markAtpos0 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos0) };
+        }
+        if(markAtpos6 === markAtpos4 &&
+           markAtpos6 === markAtpos2 &&
+           markAtpos6 !== null &&
+           markAtpos6 !== " ") {
+            return { over: true, player: this._playersMark.indexOf(markAtpos6) };
+        }
 
         return { over: false, player: -1 };
     }
@@ -64,28 +105,27 @@ class Game {
         this._rl.question(`It is player ${self._whichPlayerTurn} turn, select a position: `,
                           function(position: number) {
 
-            console.log(`You selected: ${position}`);
+            //Make the player move
+            self._board.makeMove(position,
+                                 self._playersMark[self._whichPlayerTurn],
+                                 (errorMessage: string) : void => {
+                if(errorMessage) {
+                    console.error(errorMessage);
+                }
+                else {
+                    self._board.draw();
 
+                    //Change the turn to other player
+                    self._whichPlayerTurn = self._whichPlayerTurn === 1 ? 0 : 1;
+                }
+            });
+
+            //Check if the game is over or not
             let gameOverStat = self._gameover();
             if(gameOverStat.over) {
                 self._end(gameOverStat.player);
             }
             else {
-                //Make the player move
-                self._board.makeMove(position,
-                                     self._playersMark[self._whichPlayerTurn],
-                                     (errorMessage: string) : void => {
-                    if(errorMessage) {
-                        console.error(errorMessage);
-                    }
-                    else {
-                        self._board.draw();
-
-                        //Change the turn to other player
-                        self._whichPlayerTurn = self._whichPlayerTurn === 1 ? 0 : 1;
-                    }
-                });
-
                 //Ask the other player for input
                 self._askUserInput();
             }

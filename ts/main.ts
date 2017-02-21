@@ -1,6 +1,6 @@
 import { Game } from "./game";
 
-//Print game header
+//Print game starting message
 console.log("\tTic-Tac-Toe");
 console.log(`\t===========`);
 

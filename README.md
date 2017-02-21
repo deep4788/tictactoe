@@ -17,15 +17,9 @@ Description
 
 Installation
 ------------
-TODO
 - Install Node.js and npm
-- Run `npm install -g TODO`
-
-Usage
------
-
-```sh
-```
+- Build `grunt`
+- Start the game `node js/main.js`
 
 Author
 ------
