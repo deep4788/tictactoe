@@ -12,9 +12,6 @@ Concepts used:
 - callbacks
 - importing modules
 
-Description
------------
-
 Installation
 ------------
 - Install Node.js and npm
